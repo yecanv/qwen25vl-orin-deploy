@@ -1,0 +1,19 @@
+D:\APP\AboutCode\Miniconda3\envs\qwen_trt\Lib\site-packages\transformers\models\auto\modeling_auto.py:2284: FutureWarning: The class `AutoModelForVision2Seq` is deprecated and will be removed in v5.0. Please use `AutoModelForImageTextToText` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+[1/3] 加载模型与校准样本
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.20s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  1.99s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.02s/it]
+[2/3] 统计逐层激活 outlier
+[3/3] 分组 KL 探测
+  vision_attn            参数占比  5.59%  outlier(max)    18.71  KL 4.2e-05
+  vision_mlp             参数占比 12.18%  outlier(max)  3153.38  KL 0.000101
+  vision_merger          参数占比  0.98%  outlier(max)     4.44  KL -4.7e-05
+  llm_attn_qkv           参数占比  5.03%  outlier(max)    34.10  KL 0.000141
+  llm_attn_o             参数占比  4.02%  outlier(max)     7.09  KL 2.6e-05
+  llm_mlp_gate_up        参数占比 43.25%  outlier(max)   191.34  KL 0.000256
+  llm_mlp_down           参数占比 21.63%  outlier(max) 1590818.35  KL 0.000701
+  lm_head                参数占比  8.29%  outlier(max)    19.22  KL 0.000181
+
+→ results\verified\sensitivity_desktop.json
+下一步：python benchmark/plot_results.py --sensitivity  出散点图
+结论写进 docs/03，面试被问'为什么 ViT 不量化'就拿这张图。

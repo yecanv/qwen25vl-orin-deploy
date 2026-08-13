@@ -1,0 +1,13 @@
+看守启动 15:01:56
+构建全部结束 15:47:57
+1
+== 测 st 15:47:57 ==
+[08/04/2026-15:49:17] [I] Latency: min = 741.281 ms, max = 752.586 ms, mean = 747.416 ms, median = 747.754 ms, percentile(90%) = 750.156 ms, percentile(95%) = 750.602 ms, percentile(99%) = 752.586 ms
+[08/04/2026-15:49:17] [I] H2D Latency: min = 0.476562 ms, max = 0.699219 ms, mean = 0.499612 ms, median = 0.492188 ms, percentile(90%) = 0.5 ms, percentile(95%) = 0.509766 ms, percentile(99%) = 0.699219 ms
+== 测 st_L4 15:49:17 ==
+[08/04/2026-15:50:36] [I] Latency: min = 734.322 ms, max = 747.586 ms, mean = 741.501 ms, median = 741.846 ms, percentile(90%) = 744.41 ms, percentile(95%) = 745.141 ms, percentile(99%) = 747.586 ms
+[08/04/2026-15:50:36] [I] H2D Latency: min = 0.35791 ms, max = 0.667969 ms, mean = 0.483296 ms, median = 0.482422 ms, percentile(90%) = 0.488281 ms, percentile(95%) = 0.492188 ms, percentile(99%) = 0.667969 ms
+== 测 st_L5 15:50:36 ==
+[08/04/2026-15:51:55] [I] Latency: min = 741.333 ms, max = 752.219 ms, mean = 746.005 ms, median = 746.115 ms, percentile(90%) = 748.723 ms, percentile(95%) = 749.586 ms, percentile(99%) = 752.219 ms
+[08/04/2026-15:51:55] [I] H2D Latency: min = 0.442383 ms, max = 0.492188 ms, mean = 0.474515 ms, median = 0.476074 ms, percentile(90%) = 0.480469 ms, percentile(95%) = 0.480469 ms, percentile(99%) = 0.492188 ms
+BENCH_ALL_DONE 15:51:55

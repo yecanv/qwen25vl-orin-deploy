@@ -1,0 +1,6 @@
+0.04.415.048 I encoding mtmd batch, n_chunks = 1 (done = 1, total = 3)
+0.07.026.425 I mtmd batch encoding done in 2612 ms
+0.04.444.928 I encoding mtmd batch, n_chunks = 1 (done = 1, total = 3)
+0.07.020.079 I mtmd batch encoding done in 2575 ms
+0.04.213.641 I encoding mtmd batch, n_chunks = 1 (done = 1, total = 3)
+0.06.808.232 I mtmd batch encoding done in 2595 ms

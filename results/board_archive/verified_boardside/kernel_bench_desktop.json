@@ -1,0 +1,55 @@
+{
+  "kernel_level": [
+    {
+      "n_tokens": 256,
+      "dim": 2048,
+      "fused_ms": 0.5595,
+      "naive_ms": 0.1335,
+      "speedup": 0.239,
+      "S_matrix_MB": 0.07,
+      "argmax_agreement": 1.0,
+      "score_max_diff": 0.0
+    },
+    {
+      "n_tokens": 576,
+      "dim": 2048,
+      "fused_ms": 1.1993,
+      "naive_ms": 0.1312,
+      "speedup": 0.109,
+      "S_matrix_MB": 0.33,
+      "argmax_agreement": 1.0,
+      "score_max_diff": 0.0
+    },
+    {
+      "n_tokens": 1024,
+      "dim": 2048,
+      "fused_ms": 2.0366,
+      "naive_ms": 0.129,
+      "speedup": 0.063,
+      "S_matrix_MB": 1.05,
+      "argmax_agreement": 1.0,
+      "score_max_diff": 0.0
+    },
+    {
+      "n_tokens": 1600,
+      "dim": 2048,
+      "fused_ms": 3.2294,
+      "naive_ms": 0.2151,
+      "speedup": 0.067,
+      "S_matrix_MB": 2.56,
+      "argmax_agreement": 1.0,
+      "score_max_diff": 0.0
+    },
+    {
+      "n_tokens": 2048,
+      "dim": 2048,
+      "fused_ms": 4.2945,
+      "naive_ms": 0.2804,
+      "speedup": 0.065,
+      "S_matrix_MB": 4.19,
+      "argmax_agreement": 1.0,
+      "score_max_diff": 0.0
+    }
+  ],
+  "end_to_end": []
+}

@@ -1,0 +1,47 @@
+{
+  "f16": {
+    "n": 200,
+    "acc": 72.33,
+    "empty": 0,
+    "timeout": 0
+  },
+  "q4km": {
+    "n": 200,
+    "acc": 71.17,
+    "empty": 0,
+    "timeout": 0
+  },
+  "comparison": {
+    "n_both": 200,
+    "same": 191,
+    "f16_win": 6,
+    "q4km_win": 3,
+    "delta_points": -1.16
+  },
+  "protocol": "TextVQA validation 200 题随机采样(seed42),llama.cpp mtmd-cli,temp=0 贪心,n=16,prompt 后缀 'Answer the question using a single word or phrase.',官方 VQA 规则 min(hits/3,1) | 两模型均 architecture=qwen2vl, tensor_count=434, 共享同一 mmproj-f16",
+  "significance": {
+    "test": "McNemar exact",
+    "f16_only_correct": 5,
+    "q4km_only_correct": 3,
+    "discordant": 8,
+    "p_two_sided": 0.727,
+    "verdict": "not significant; quantization cost bounded by ~1.2 points at n=200"
+  },
+  "robustness": {
+    "loose_scoring_acc": {
+      "f16": 81.0,
+      "q4km": 79.0
+    },
+    "note": "direction consistent under loose scoring"
+  },
+  "round1_voided": {
+    "why": "control group f16 GGUF had architecture=qwen2 (1D RoPE) instead of qwen2vl (M-RoPE)",
+    "round1_numbers": {
+      "f16": 67.67,
+      "q4km": 71.17,
+      "discordant": 25
+    },
+    "fix": "reconverted f16 from full HF model; both now architecture=qwen2vl, tensors=434",
+    "evidence_of_fix": "discordant pairs dropped 25 -> 8; 191/200 identical answers"
+  }
+}

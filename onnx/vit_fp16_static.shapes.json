@@ -1,0 +1,21 @@
+{
+  "static": true,
+  "patch_dim": 1176,
+  "grid_thw": [
+    1,
+    64,
+    64
+  ],
+  "input": {
+    "pixel_values": [
+      4096,
+      1176
+    ]
+  },
+  "output": {
+    "vision_embeds": [
+      1024,
+      2048
+    ]
+  }
+}

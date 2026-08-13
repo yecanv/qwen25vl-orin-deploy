@@ -1,0 +1,26 @@
+{
+  "date": "2026-08-12",
+  "experiment": "ViT INT8 引擎构建(QDQ stronglyTyped 路线)",
+  "status": "终止——构建期图优化在 Jetson 弱 CPU 上病态慢,3 小时未产出",
+  "证据": {
+    "CPU累计_min": 189,
+    "GPU利用率": "全程 0%(从未进入战术计时阶段)",
+    "RAM峰值": "13.7/15.6 GB 逼近 OOM",
+    "对照_FP16构建_min": 55
+  },
+  "根因": "QDQ 显式量化图节点爆炸(1796 fp32岛softmax + 数千对Q/DQ),TensorRT 构建期常量折叠/Myelin图编译在 Orin ARM CPU 上病态慢,卡在 GPU 战术计时【之前】",
+  "六跑历程回顾": [
+    "①隐式校准FP16输入越界",
+    "②DDS杀executeV2",
+    "③ModelOpt批次惯例",
+    "④fp16激活inf卡熵校准",
+    "⑤bin退化→minmax",
+    "⑥QDQ生成成功但板上构建病态慢终止"
+  ],
+  "结论_三重价值": [
+    "1 反向加固'ViT保FP16'决策:不仅量化ViT对decode零贡献,连【构建一个量化ViT引擎】在Jetson上都病态昂贵",
+    "2 QDQ vs隐式量化的真实代价对比:隐式快但不支持DDS输出;QDQ支持但图优化在弱CPU上不可行",
+    "3 六堵墙教训链:是'真做过ViT量化的人才知道'的稀缺经验"
+  ],
+  "下次借板/更强机器可试": "限制量化范围(只量化线性层、跳过attention/softmax)减少Q/DQ节点数;或在AGX Orin等更强CPU上构建"
+}

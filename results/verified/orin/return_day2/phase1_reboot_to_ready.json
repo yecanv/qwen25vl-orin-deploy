@@ -1,0 +1,19 @@
+{
+  "date": "2026-08-12",
+  "口径": "软重启(sudo reboot)非物理断电;服务段为板钟计时",
+  "reboot_to_ssh_s": 44,
+  "service_start_to_health_s": [
+    6.48,
+    6.47,
+    7.08
+  ],
+  "first_min_inference_s": [
+    0.46,
+    0.45,
+    0.45
+  ],
+  "reboot_to_ready_total_s": "约 51.5(44 + ~7 + ~0.5)",
+  "config": "Q4_K_M + mmproj,-np 2 -c 4096;冷启动含系统引导+CUDA 首次初始化",
+  "note": "与 4.53s(drop_caches 口径,不含系统引导)边界不同,不可混比;开机后热区 54~63°C 为板体余温,不能做室温代理",
+  "ambient": "室温约 26°C(空调房,用户口头报告,非仪器记录)"
+}

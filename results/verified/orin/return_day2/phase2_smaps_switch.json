@@ -1,0 +1,129 @@
+{
+  "clock": "board",
+  "stages": {
+    "S0_baseline_no_server": {
+      "meminfo": {
+        "MemAvailable_MB": 12210,
+        "MemFree_MB": 8076,
+        "SwapUsed_MB": 0
+      },
+      "power": {
+        "VDD_IN_mW_avg": 5491,
+        "samples": 11
+      }
+    },
+    "S1_loaded_idle": {
+      "meminfo": {
+        "MemAvailable_MB": 9124,
+        "MemFree_MB": 4989,
+        "SwapUsed_MB": 0
+      },
+      "power": {
+        "VDD_IN_mW_avg": 5450,
+        "samples": 11
+      },
+      "server_smaps": {
+        "Rss_MB": 537,
+        "Pss_MB": 527
+      }
+    },
+    "S2_after_first_request": {
+      "meminfo": {
+        "MemAvailable_MB": 9123,
+        "MemFree_MB": 4988,
+        "SwapUsed_MB": 0
+      },
+      "power": {
+        "VDD_IN_mW_avg": 7460,
+        "samples": 11
+      },
+      "server_smaps": {
+        "Rss_MB": 540,
+        "Pss_MB": 530
+      }
+    },
+    "S3_after_long_input": {
+      "meminfo": {
+        "MemAvailable_MB": 9053,
+        "MemFree_MB": 4913,
+        "SwapUsed_MB": 0
+      },
+      "power": {
+        "VDD_IN_mW_avg": 8344,
+        "samples": 11
+      },
+      "server_smaps": {
+        "Rss_MB": 551,
+        "Pss_MB": 538
+      }
+    },
+    "S4_during_8way_concurrent": {
+      "meminfo": {
+        "MemAvailable_MB": 8841,
+        "MemFree_MB": 4690,
+        "SwapUsed_MB": 0
+      },
+      "power": {
+        "VDD_IN_mW_avg": 23749,
+        "samples": 11
+      },
+      "server_smaps": {
+        "Rss_MB": 668,
+        "Pss_MB": 654
+      }
+    },
+    "S5_switch_overlap_peak": {
+      "meminfo": {
+        "MemAvailable_MB": 2796,
+        "MemFree_MB": 156,
+        "SwapUsed_MB": 254
+      },
+      "power": {
+        "VDD_IN_mW_avg": 5723,
+        "samples": 11
+      },
+      "server_smaps": {
+        "Rss_MB": 375,
+        "Pss_MB": 331
+      }
+    },
+    "S6_after_q4_unloaded": {
+      "meminfo": {
+        "MemAvailable_MB": 5740,
+        "MemFree_MB": 3071,
+        "SwapUsed_MB": 103
+      },
+      "power": {
+        "VDD_IN_mW_avg": 5546,
+        "samples": 11
+      },
+      "server_smaps": {
+        "Rss_MB": 242,
+        "Pss_MB": 235
+      }
+    },
+    "S7_all_stopped": {
+      "meminfo": {
+        "MemAvailable_MB": 12143,
+        "MemFree_MB": 9465,
+        "SwapUsed_MB": 99
+      },
+      "power": {
+        "VDD_IN_mW_avg": 5983,
+        "samples": 11
+      }
+    }
+  },
+  "q4_load_to_health_s": 4.05,
+  "first_req_s": 0.75,
+  "long_input": {
+    "latency_s": 2.88,
+    "prompt_n": 1534
+  },
+  "switch": {
+    "f16_load_to_health_s": 15.42,
+    "q4_unload_s": 2.62,
+    "f16_first_req_s": 1.46
+  },
+  "ambient": "室温约 26°C(空调房,用户口头报告,非仪器记录)"
+}

@@ -1,0 +1,15 @@
+{
+  "date": "2026-08-12",
+  "type": "端到端 TTFT 估算(roofline/组件合成,非实测)",
+  "红线": "TRT-LLM 端到端未运行(0.12 无 mrope);本数为性能建模预测,严禁当实测/严禁进简历成果行",
+  "组件": {
+    "ViT_TRT_ms": 750,
+    "prefill_ms_est": 1100,
+    "bridge_ms_est": 75,
+    "prefill_口径": "保守借用同板 llama.cpp ~1000 tok/s 作下界;TRT-LLM 实际更快"
+  },
+  "TRT_e2e_ttft_est_s": "约 1.9~2.0",
+  "对照_llamacpp_e2e_ttft_实测_s": 3.59,
+  "结论": "TRT 路线预计砍到约一半,收益源自 ViT 快 3.46 倍;decode 45.9 已实测无需估",
+  "验证条件": "JP7 + Edge-LLM 官方端到端跑通后可实测校验此估算"
+}

@@ -1,0 +1,12 @@
+{
+  "model": "E:\\models\\qwen25vl-3b",
+  "alpha": 0.3,
+  "target_group": "llm_mlp_down(36)",
+  "quant": "int4-g128 + AWQ-style k=mean|x|^alpha",
+  "quadrants": {
+    "calib=vl|probe=vl": 0.045245080487802625,
+    "calib=vl|probe=txt": 0.006092432815421489,
+    "calib=txt|probe=vl": 0.028621661593206227,
+    "calib=txt|probe=txt": 0.007678826794290217
+  }
+}

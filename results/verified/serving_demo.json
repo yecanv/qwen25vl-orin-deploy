@@ -1,0 +1,27 @@
+{
+  "image": "34603.jpg",
+  "round1": {
+    "latency_s": 7.33,
+    "usage": {
+      "completion_tokens": 92,
+      "prompt_tokens": 915,
+      "total_tokens": 1007,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "answer": "这张图片展示了一个大型的横幅，上面写着“DRUPALCON COPENHAGEN”。横幅上画有多个蓝色的水滴形状，每个水滴上都有不同的表情和装饰。水滴的排列方式类似于一个队伍，每个水滴都戴着不同的皇冠和帽子，显示出不同的个性和风格。横幅的背景是蓝色的，与水滴的颜色相呼应，整体设计非常生动和有趣。"
+  },
+  "round2": {
+    "latency_s": 0.79,
+    "usage": {
+      "completion_tokens": 11,
+      "prompt_tokens": 921,
+      "total_tokens": 932,
+      "prompt_tokens_details": {
+        "cached_tokens": 904
+      }
+    },
+    "answer": "DRUPALCON\nCOPENHAGEN"
+  }
+}

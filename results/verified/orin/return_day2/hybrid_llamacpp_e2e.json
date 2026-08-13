@@ -1,0 +1,52 @@
+{
+  "date": "2026-08-12",
+  "experiment": "混合端到端实测:TRT ViT 引擎 → llama_batch.embd → llama.cpp LLM(Q4_K_M),板上原生",
+  "status": "PASS——一次编译一次运行,双图判据全过",
+  "架构": "vit_fp16_st.engine(TRT,741ms现产) → fp32特征[1024,2048] → 手写C++驱动(runtime/hybrid_driver.cpp,公开API,零改llama.cpp源码) → llama_batch(embd注入+mrope四块位置) → 分段llama_decode → 贪心生成",
+  "mrope布局": "照抄 mtmd 语义:文本批1维pos(核心自动广播);图块pos[4N]分段块状 块0=t(常量) 块1=y行 块2=x列 块3=0;图后 n_past += max(nx,ny)=32",
+  "判定": {
+    "图A_城市": {
+      "答案要素": "城市景观/高楼/黄灯窗户/蓝天/三色车辆",
+      "对照": "与HF参考一致(仅粉→紫一处色偏,Q4正常)",
+      "verdict": "PASS"
+    },
+    "图B_形状": {
+      "答案要素": "绿色正方形(左上)+红色圆形(右下)",
+      "对照": "与HF零串扰参考逐物一致且多给正确位置",
+      "verdict": "PASS"
+    },
+    "零串扰": "两图答案各自正确互不沾染(纯llama.cpp mtmd同图会串扰,见multiimg_synthetic_test)"
+  },
+  "性能": {
+    "vit_ms": {
+      "a": 741.9,
+      "b": 741.0,
+      "口径": "TRT引擎纯GPU前向,预热后单次"
+    },
+    "llm_prefill_ms": 1133,
+    "prefill口径": "15+1024+13=1052tok 三段之和(45+153+935;异步执行段间归因模糊,总和可靠≈1113tok/s与pp基准吻合)",
+    "decode_tok_s": {
+      "a": 25.97,
+      "b": 25.76,
+      "口径": "逐token批,含每步logits"
+    },
+    "TTFT_合成": "741+1133+采样≈1.88s",
+    "TTFT口径警告": "分程序串行实测之和(ViT python进程+LLM驱动进程),未含图像预处理与特征落盘IO(~0.1-0.2s);对照纯llama.cpp链P50 3.59s(含预处理)→ 提速约1.7~1.9倍,同板同模型",
+    "对比锚点": {
+      "纯llama.cpp_mmproj链_TTFT_P50": 3.59,
+      "mmproj编码_ms": 2595,
+      "TRT_ViT_ms": 741
+    }
+  },
+  "三雕验证": [
+    "端到端跑通(绕开TRT-LLM 0.12无mrope)",
+    "视觉快3.5倍且golden验证(照片乱码bug从链路消失——视觉不再走llama.cpp)",
+    "板上JP6.2原生,零刷机零fork"
+  ],
+  "文件": {
+    "驱动": "runtime/hybrid_driver.cpp(板上g++编译,链接libllama.so)",
+    "特征提取": "runtime/trt_extract_feats.py",
+    "运行日志": "stderr_a.log/stderr_b.log/vit_report.json(同目录)"
+  },
+  "环境": "Orin NX 16GB JP6.2 MAXN_SUPER 风扇拉满,llama.cpp ddd4ec1(2026-08-01 master),TRT 10.3"
+}

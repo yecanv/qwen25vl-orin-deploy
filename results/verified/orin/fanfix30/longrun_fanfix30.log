@@ -1,0 +1,76 @@
+server ready
+PHASE_A_START 1786375094.6446714
+A[20] tps=26.5
+A[40] tps=26.5
+A[60] tps=26.5
+A[80] tps=26.4
+A[100] tps=26.5
+A[120] tps=26.4
+A[140] tps=26.4
+A[160] tps=26.5
+A[180] tps=26.5
+A[200] tps=26.5
+A[220] tps=26.5
+A[240] tps=26.5
+A[260] tps=26.4
+A[280] tps=26.4
+A[300] tps=26.4
+A[320] tps=26.4
+A[340] tps=26.4
+A[360] tps=26.5
+A[380] tps=26.4
+PHASE_A_END 1786376898.9966867
+PHASE_C_START 1786376898.9967325
+PHASE_C_END 1786377087.1419253
+{
+  "phase_a_requests": 385,
+  "windows": {
+    "win0_5min": {
+      "p50": 26.45,
+      "p95": 26.48,
+      "n": 64
+    },
+    "win1_5min": {
+      "p50": 26.45,
+      "p95": 26.48,
+      "n": 64
+    },
+    "win2_5min": {
+      "p50": 26.45,
+      "p95": 26.48,
+      "n": 64
+    },
+    "win3_5min": {
+      "p50": 26.45,
+      "p95": 26.5,
+      "n": 65
+    },
+    "win4_5min": {
+      "p50": 26.45,
+      "p95": 26.48,
+      "n": 63
+    },
+    "win5_5min": {
+      "p50": 26.45,
+      "p95": 26.49,
+      "n": 65
+    }
+  },
+  "p50_drift_pct": 0.0,
+  "power_mW": {
+    "avg": null,
+    "max": null
+  },
+  "gpu_temp_C": {
+    "max": null,
+    "avg": null
+  },
+  "energy_efficiency_tok_per_J": null,
+  "phase_c": {
+    "duration_s": 188.1,
+    "total_tokens": 9006,
+    "aggregate_tps": 47.87,
+    "requests": 73
+  }
+}
+LONGRUN_ALL_DONE

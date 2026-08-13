@@ -1,0 +1,8 @@
+idle VDD_IN 5463 mW
+[10/50] ttft=3.55s
+[20/50] ttft=3.59s
+[30/50] ttft=3.60s
+[40/50] ttft=3.59s
+[50/50] ttft=3.59s
+{"n_requests": 50, "images": "10 张互异合成 896²(避开视觉故障区,轮换防缓存)", "idle_power_mW": 5463, "ttft_s": {"P50": 3.59, "P95": 3.6, "P99": 3.63, "max": 3.63, "n": 50}, "J_per_request": {"P50": 115.5, "mean": 112.0, "n": 50}, "J_per_token_full_request": {"P50": 3.16, "mean": 4.34}, "口径": "完整 VLM 请求(视觉编码+prefill+decode)对 VDD_IN 10Hz 梯形积分,板钟统一;J/token 分母为输出 token 数"}
+PHASE3_DONE

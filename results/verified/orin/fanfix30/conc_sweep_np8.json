@@ -1,0 +1,38 @@
+{
+  "config": "llama-server -np 8 -c 16384 +mmproj,MAXN_SUPER,风扇拉满,重启后即测",
+  "prompt_mode": "纯文本(与长稳同口径)",
+  "levels": {
+    "c1": {
+      "clients": 1,
+      "n_req": 21,
+      "wall_s": 94.8,
+      "aggregate_tps": 26.12,
+      "per_req_decode_tps_p50": 26.42,
+      "per_req_latency_p50_s": 4.89
+    },
+    "c2": {
+      "clients": 2,
+      "n_req": 36,
+      "wall_s": 92.7,
+      "aggregate_tps": 47.49,
+      "per_req_decode_tps_p50": 24.42,
+      "per_req_latency_p50_s": 5.37
+    },
+    "c4": {
+      "clients": 4,
+      "n_req": 47,
+      "wall_s": 95.7,
+      "aggregate_tps": 60.38,
+      "per_req_decode_tps_p50": 15.57,
+      "per_req_latency_p50_s": 8.36
+    },
+    "c8": {
+      "clients": 8,
+      "n_req": 57,
+      "wall_s": 100.9,
+      "aggregate_tps": 68.86,
+      "per_req_decode_tps_p50": 9.13,
+      "per_req_latency_p50_s": 14.26
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "n_requests": 50,
+  "images": "50 张全互异合成 896²(每请求必冷;首轮 10 图版曾命中 prompt cache,教训已记)",
+  "idle_power_mW": 5463,
+  "ttft_s": {
+    "P50": 3.59,
+    "P95": 3.6,
+    "P99": 3.63,
+    "max": 3.63,
+    "n": 50
+  },
+  "J_per_request": {
+    "P50": 115.5,
+    "mean": 112.0,
+    "n": 50
+  },
+  "J_per_token_full_request": {
+    "P50": 3.16,
+    "mean": 4.34
+  },
+  "口径": "完整 VLM 请求(视觉编码+prefill+decode)对 VDD_IN 10Hz 梯形积分,板钟统一;J/token 分母为输出 token 数",
+  "ttft_cached_s": 0.1,
+  "对照": "decode-only 能效 1.05 J/token(长稳口径) vs 完整 VLM 请求 3.16 J/token——视觉编码与 prefill 的能量占大头",
+  "ambient": "室温约 26°C(空调房,用户口头报告,非仪器记录)"
+}

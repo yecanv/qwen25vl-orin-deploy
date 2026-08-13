@@ -1,0 +1,20 @@
+{
+  "date": "2026-08-07",
+  "method_user_view": "OpenAI 兼容流式请求,桌面→板端 LAN,计时到首个 content chunk;每次换图避免 prompt cache 命中",
+  "stream_ttft_s": {
+    "first_request_with_warmup": 6.3,
+    "steady_1": 4.15,
+    "steady_2": 3.54
+  },
+  "method_server_view": "llama-server 响应 timings 字段",
+  "server_timings": {
+    "prompt_ms": 4102.6,
+    "prompt_n_uncached": 1011,
+    "cached_tokens": 15,
+    "predicted_per_second": 26.34,
+    "predicted_n": 64
+  },
+  "cross_check": "直接实测稳态 3.5~4.2s vs 组件合成 3.6s(视觉 2595ms+prefill 1040tok@1009)吻合;predicted_per_second 26.34 与 tg128 26.56 互证",
+  "stack": "B 轨 llama.cpp(Q4_K_M + mmproj-f16),896 级动态分辨率原图",
+  "note": "首次请求 6.30s 含服务预热,报稳态口径需丢弃首发或先预热"
+}

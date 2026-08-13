@@ -1,0 +1,23 @@
+{
+  "model": "NVIDIA Jetson Orin NX Engineering Reference Developer Kit Super",
+  "l4t": "# R36 (release), REVISION: 4.4, GCID: 41062509, BOARD: generic, EABI: aarch64, DATE: Mon Jun 16 16:07:13 UTC 2025",
+  "jetpack": "6.2.1+b38",
+  "nvpmodel": "NV Power Mode: MAXN_SUPER 0",
+  "jetson_clocks": "SOC family:tegra234  Machine:NVIDIA Jetson Orin NX Engineering Reference Developer Kit Super\nError: Run this script(/usr/bin/jetson_clocks) as a root user",
+  "cuda": "",
+  "tensorrt": "10.3.0",
+  "tensorrt_llm": "not installed",
+  "torch": "2.5.0a0+872d972e41.nv24.08",
+  "torch_cuda": "12.6",
+  "gpu_name": "Orin",
+  "sm": "8.7",
+  "total_mem_mb": 15655,
+  "sm_count": 8,
+  "mem_total_mb": 15655,
+  "swap_total_mb": 24211,
+  "measured_bandwidth_gbs": 67.7
+}
+
+→ results/device_info.json
+
+检查清单：

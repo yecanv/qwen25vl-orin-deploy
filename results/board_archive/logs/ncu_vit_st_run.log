@@ -1,0 +1,128 @@
+[sudo] password for nvidia: &&&& RUNNING TensorRT.trtexec [TensorRT v100300] # /usr/src/tensorrt/bin/trtexec --loadEngine=/home/nvidia/work/qwen25vl-orin-deploy/engines/vit_fp16_st.engine --warmUp=0 --duration=0 --iterations=1
+[08/04/2026-11:34:59] [I] === Model Options ===
+[08/04/2026-11:34:59] [I] Format: *
+[08/04/2026-11:34:59] [I] Model: 
+[08/04/2026-11:34:59] [I] Output:
+[08/04/2026-11:34:59] [I] 
+[08/04/2026-11:34:59] [I] === System Options ===
+[08/04/2026-11:34:59] [I] Device: 0
+[08/04/2026-11:34:59] [I] DLACore: 
+[08/04/2026-11:34:59] [I] Plugins:
+[08/04/2026-11:34:59] [I] setPluginsToSerialize:
+[08/04/2026-11:34:59] [I] dynamicPlugins:
+[08/04/2026-11:34:59] [I] ignoreParsedPluginLibs: 0
+[08/04/2026-11:34:59] [I] 
+[08/04/2026-11:34:59] [I] === Inference Options ===
+[08/04/2026-11:34:59] [I] Batch: Explicit
+[08/04/2026-11:34:59] [I] Input inference shapes: model
+[08/04/2026-11:34:59] [I] Iterations: 1
+[08/04/2026-11:34:59] [I] Duration: 0s (+ 0ms warm up)
+[08/04/2026-11:34:59] [I] Sleep time: 0ms
+[08/04/2026-11:34:59] [I] Idle time: 0ms
+[08/04/2026-11:34:59] [I] Inference Streams: 1
+[08/04/2026-11:34:59] [I] ExposeDMA: Disabled
+[08/04/2026-11:34:59] [I] Data transfers: Enabled
+[08/04/2026-11:34:59] [I] Spin-wait: Disabled
+[08/04/2026-11:34:59] [I] Multithreading: Disabled
+[08/04/2026-11:34:59] [I] CUDA Graph: Disabled
+[08/04/2026-11:34:59] [I] Separate profiling: Disabled
+[08/04/2026-11:34:59] [I] Time Deserialize: Disabled
+[08/04/2026-11:34:59] [I] Time Refit: Disabled
+[08/04/2026-11:34:59] [I] NVTX verbosity: 0
+[08/04/2026-11:34:59] [I] Persistent Cache Ratio: 0
+[08/04/2026-11:34:59] [I] Optimization Profile Index: 0
+[08/04/2026-11:34:59] [I] Weight Streaming Budget: 100.000000%
+[08/04/2026-11:34:59] [I] Inputs:
+[08/04/2026-11:34:59] [I] Debug Tensor Save Destinations:
+[08/04/2026-11:34:59] [I] === Reporting Options ===
+[08/04/2026-11:34:59] [I] Verbose: Disabled
+[08/04/2026-11:34:59] [I] Averages: 10 inferences
+[08/04/2026-11:34:59] [I] Percentiles: 90,95,99
+[08/04/2026-11:34:59] [I] Dump refittable layers:Disabled
+[08/04/2026-11:34:59] [I] Dump output: Disabled
+[08/04/2026-11:34:59] [I] Profile: Disabled
+[08/04/2026-11:34:59] [I] Export timing to JSON file: 
+[08/04/2026-11:34:59] [I] Export output to JSON file: 
+[08/04/2026-11:34:59] [I] Export profile to JSON file: 
+[08/04/2026-11:34:59] [I] 
+[08/04/2026-11:34:59] [I] === Device Information ===
+==PROF== Connected to process 14675 (/usr/src/tensorrt/bin/trtexec)
+[08/04/2026-11:34:59] [I] Available Devices: 
+[08/04/2026-11:34:59] [I]   Device 0: "Orin" UUID: GPU-85259e38-4448-5ed8-8099-1025fc8c4f97
+[08/04/2026-11:35:00] [I] Selected Device: Orin
+[08/04/2026-11:35:00] [I] Selected Device ID: 0
+[08/04/2026-11:35:00] [I] Selected Device UUID: GPU-85259e38-4448-5ed8-8099-1025fc8c4f97
+[08/04/2026-11:35:00] [I] Compute Capability: 8.7
+[08/04/2026-11:35:00] [I] SMs: 8
+[08/04/2026-11:35:00] [I] Device Global Memory: 15655 MiB
+[08/04/2026-11:35:00] [I] Shared Memory per SM: 164 KiB
+[08/04/2026-11:35:00] [I] Memory Bus Width: 256 bits (ECC disabled)
+[08/04/2026-11:35:00] [I] Application Compute Clock Rate: 1.173 GHz
+[08/04/2026-11:35:00] [I] Application Memory Clock Rate: 1.173 GHz
+[08/04/2026-11:35:00] [I] 
+[08/04/2026-11:35:00] [I] Note: The application clock rates do not reflect the actual clock rates that the GPU is currently running at.
+[08/04/2026-11:35:00] [I] 
+[08/04/2026-11:35:00] [I] TensorRT version: 10.3.0
+[08/04/2026-11:35:00] [I] Loading standard plugins
+[08/04/2026-11:35:01] [I] [TRT] Loaded engine size: 1324 MiB
+[08/04/2026-11:35:01] [W] [TRT] Using an engine plan file across different models of devices is not recommended and is likely to affect performance or even cause errors.
+[08/04/2026-11:35:01] [I] Engine deserialized in 1.44459 sec.
+[08/04/2026-11:35:03] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +194, now: CPU 0, GPU 1475 (MiB)
+[08/04/2026-11:35:03] [I] Setting persistentCacheLimit to 0 bytes.
+[08/04/2026-11:35:03] [I] Created execution context with device memory size: 194.141 MiB
+[08/04/2026-11:35:03] [I] Using random values for input pixel_values
+[08/04/2026-11:35:03] [I] Input binding for pixel_values with dimensions 4096x1176 is created.
+[08/04/2026-11:35:03] [I] Output binding for vision_embeds is dynamic and will be created during execution using OutputAllocator.
+[08/04/2026-11:35:03] [I] Starting inference
+==PROF== Profiling "sm50_xmma_cublas_smallN_NN_f3..." - 0 (1/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "__myl_CasResRepResTraResResRe..." - 1 (2/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "__myl_Bot_0x7a4cf0ec100d3eed1..." - 2 (3/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "__myl_Mea_0x1cf014bbf36641c38..." - 3 (4/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "__myl_AddSqrDivMulCasMul_0x75..." - 4 (5/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "sm80_xmma_gemm_f16f16_f16f32_..." - 5 (6/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "__myl_SinResCosResTraSliResTr..." - 6 (7/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 7 (8/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 8 (9/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 9 (10/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 10 (11/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 11 (12/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 12 (13/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 13 (14/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 14 (15/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 15 (16/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 16 (17/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 17 (18/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 18 (19/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 19 (20/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 20 (21/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 21 (22/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 22 (23/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 23 (24/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 24 (25/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 25 (26/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 26 (27/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 27 (28/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 28 (29/30): 0%....50%....100% - 8 passes
+==PROF== Profiling "_gemm_mha_v2_0x1b6b4995211517..." - 29 (30/30): 0%....50%....100% - 8 passes
+[08/04/2026-11:44:03] [I] Warmup completed 0 queries over 0 ms
+[08/04/2026-11:44:03] [I] Timing trace has 1 queries over 540.219 s
+[08/04/2026-11:44:03] [I] 
+[08/04/2026-11:44:03] [I] === Trace details ===
+[08/04/2026-11:44:03] [I] Trace averages of 10 runs:
+[08/04/2026-11:44:03] [I] 
+[08/04/2026-11:44:03] [I] === Performance summary ===
+[08/04/2026-11:44:03] [I] Throughput: 0.0018511 qps
+[08/04/2026-11:44:03] [I] Latency: min = 540219 ms, max = 540219 ms, mean = 540219 ms, median = 540219 ms, percentile(90%) = 540219 ms, percentile(95%) = 540219 ms, percentile(99%) = 540219 ms
+[08/04/2026-11:44:03] [I] Enqueue Time: min = 540209 ms, max = 540209 ms, mean = 540209 ms, median = 540209 ms, percentile(90%) = 540209 ms, percentile(95%) = 540209 ms, percentile(99%) = 540209 ms
+[08/04/2026-11:44:03] [I] H2D Latency: min = 0.609952 ms, max = 0.609952 ms, mean = 0.609952 ms, median = 0.609952 ms, percentile(90%) = 0.609952 ms, percentile(95%) = 0.609952 ms, percentile(99%) = 0.609952 ms
+[08/04/2026-11:44:03] [I] GPU Compute Time: min = 540218 ms, max = 540218 ms, mean = 540218 ms, median = 540218 ms, percentile(90%) = 540218 ms, percentile(95%) = 540218 ms, percentile(99%) = 540218 ms
+[08/04/2026-11:44:03] [I] D2H Latency: min = 0.125 ms, max = 0.125 ms, mean = 0.125 ms, median = 0.125 ms, percentile(90%) = 0.125 ms, percentile(95%) = 0.125 ms, percentile(99%) = 0.125 ms
+[08/04/2026-11:44:03] [I] Total Host Walltime: 540.219 s
+[08/04/2026-11:44:03] [I] Total GPU Compute Time: 540.218 s
+[08/04/2026-11:44:03] [W] * Throughput may be bound by Enqueue Time rather than GPU Compute and the GPU may be under-utilized.
+[08/04/2026-11:44:03] [W]   If not already in use, --useCudaGraph (utilize CUDA graphs where possible) may increase the throughput.
+[08/04/2026-11:44:03] [I] Explanations of the performance metrics are printed in the verbose logs.
+[08/04/2026-11:44:03] [I] 
+&&&& PASSED TensorRT.trtexec [TensorRT v100300] # /usr/src/tensorrt/bin/trtexec --loadEngine=/home/nvidia/work/qwen25vl-orin-deploy/engines/vit_fp16_st.engine --warmUp=0 --duration=0 --iterations=1
+==PROF== Disconnected from process 14675
+==PROF== Report: /home/nvidia/work/qwen25vl-orin-deploy/results/raw/ncu_vit_st.ncu-rep

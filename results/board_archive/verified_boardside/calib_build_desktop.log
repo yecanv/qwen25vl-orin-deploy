@@ -1,0 +1,29 @@
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+[calib] max_pixels=401408 → 单图视觉 token 上限 ≈ 512
+[calib] 预估体积：单样本 4.8 MB × 128 条 = **0.62 GB**
+
+[calib] textvqa          配额   38   图中文字，激活分布与自然图像差异大，必须覆盖
+[calib]   取得 38/38（扫描 38 行），剩余待补 90
+
+[calib] coco_caption     配额   45   通用图像描述，分布最广，主力
+[calib]   取得 45/45（扫描 45 行），剩余待补 45
+
+[calib] docvqa           配额   26   文档类高分辨率，视觉 token 数量级最大
+[calib]   取得 26/26（扫描 26 行），剩余待补 19
+
+[calib] vqav2            配额   19   通用视觉问答，补充问答型 prompt 分布
+[calib]   取得 19/19（扫描 19 行），剩余待补 0
+
+[calib] 收集完成 128 条
+
+[calib] 已保存 → calib\data\vl_calib_128.pt  (513.1 MB)
+[calib] 元信息 → calib\data\vl_calib_128.meta.json
+[calib] 面试会问校准集来源，这个 json 保留好，别删。
+
+[calib] 统计：
+        n_samples            128
+        seq_len_min          288
+        seq_len_p50          506
+        seq_len_p95          532
+        seq_len_max          544
+        by_source            {'textvqa': 38, 'coco_caption': 45, 'docvqa': 26, 'vqav2': 19}

@@ -1,0 +1,39 @@
+{
+  "date": "2026-08-11",
+  "test": "多图单请求(llama.cpp 链路,mtmd-cli 双 --image,合成图口径避开视觉故障)",
+  "run1": {
+    "images": [
+      "demo896(城市)",
+      "demo_low(同场景448)"
+    ],
+    "result": "两图均正确描述;因两图同内容,不构成分辨证据"
+  },
+  "run2": {
+    "images": [
+      "demo896(城市,无红圆)",
+      "shapes896(红圆+绿方块,无建筑)"
+    ],
+    "answer": "第一张:红色圆形+建筑物;第二张:红色圆形+道路建筑物",
+    "result": "图间内容串扰:城市图被安上红圆,图形图被安上建筑"
+  },
+  "conclusion": "多图管线可运行(双图编码/生成正常),但图与图的特征隔离不可靠——不能声称多图实测通过;与 llama.cpp 加载警告引用的 Qwen-VL 已知问题一致(ggml-org/llama.cpp#16842)",
+  "interview_note": "面试口径:多图在 TensorRT-LLM 链路是 prompt table 拼接+M-RoPE 段隔离,机制清楚;llama.cpp 链路实测存在图间串扰,正好用 M-RoPE 段隔离机理解释故障形态",
+  "hf_reference_control": {
+    "date": "2026-08-11",
+    "setup": "桌面 HF transformers 参考实现,同思路双合成图(城市方块图 896² + 红圆绿方图 448²),temp 0",
+    "answer": "第一张图里有三个灰色的长方形,它们并排排列在蓝色背景上。第二张图里有一个绿色的正方形和一个红色的圆形,它们都位于白色背景上。",
+    "result": "零串扰,逐物精确——参考实现完美分辨",
+    "conclusion_upgrade": "3B 模型能力足以分辨双图 → llama.cpp 的图间串扰坐实为其 mtmd 实现问题,非模型能力问题"
+  },
+  "root_cause_nailed": {
+    "date": "2026-08-11",
+    "trigger": "两张图的占位标记相邻(中间无文本)——CLI 自动插入与显式相邻同症;有文本分隔则零串扰",
+    "evidence": {
+      "separated": "「第一张图:<媒体> 第二张图:<媒体>」→ 两图各自精确,零串扰(最新 master 实测)",
+      "adjacent": "「<媒体><媒体>」→ 两问答案全部来自第二张图,第一张被完全遮盖(位置区间重叠的叠影行为)"
+    },
+    "source_analysis": "mtmd.cpp 的 MROPE 位置公式正确(t=基址,x/y=基址+列/行,段间推进 max(nx,ny));问题在相邻图像块求值路径,官方代码留有 TODO「需确保一次只处理一张图」",
+    "workaround": "多图请求把内容排成 图/文/图/文,不要 图/图/文;serving 的 OpenAI content 数组同理",
+    "status": "用法层已修复(实测两次);代码层具备完整上游 issue 素材(最小复现+源码排除+触发条件)"
+  }
+}

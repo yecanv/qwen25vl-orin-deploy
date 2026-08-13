@@ -1,0 +1,51 @@
+{
+  "phase_a_requests": 371,
+  "windows": {
+    "win0_5min": {
+      "p50": 26.47,
+      "p95": 26.52,
+      "n": 66
+    },
+    "win1_5min": {
+      "p50": 25.01,
+      "p95": 25.24,
+      "n": 62
+    },
+    "win2_5min": {
+      "p50": 24.74,
+      "p95": 24.87,
+      "n": 61
+    },
+    "win3_5min": {
+      "p50": 24.74,
+      "p95": 24.84,
+      "n": 60
+    },
+    "win4_5min": {
+      "p50": 24.74,
+      "p95": 24.86,
+      "n": 61
+    },
+    "win5_5min": {
+      "p50": 24.73,
+      "p95": 24.8,
+      "n": 61
+    }
+  },
+  "p50_drift_pct": -6.57,
+  "power_mW": {
+    "avg": 27871,
+    "max": 29522
+  },
+  "gpu_temp_C": {
+    "max": 100.062,
+    "avg": 97.9
+  },
+  "energy_efficiency_tok_per_J": 0.95,
+  "phase_c": {
+    "duration_s": 187.3,
+    "total_tokens": 10266,
+    "aggregate_tps": 54.82,
+    "requests": 84
+  }
+}

@@ -1,0 +1,35 @@
+# 评测集声明
+#
+# 红线：这里列的数据集**不得**出现在 calib/build_vl_calib.py 的校准源里。
+# 校准与评测必须严格分离，否则是数据泄漏。
+#
+# 面试官会问："你校准和评测用的同一批数据吗？"
+# 这个文件就是你的答案。
+
+evaluation:
+  - name: mmbench_cn
+    repo: lmms-lab/MMBench_CN
+    split: dev
+    purpose: 中文多模态综合能力
+    n_samples: 200
+
+  - name: textvqa_test
+    repo: lmms-lab/TextVQA
+    split: test          # 注意：校准用的是 validation，这里用 test
+    purpose: 图中文字识别，量化最敏感的能力
+    n_samples: 200
+
+  - name: mme
+    repo: lmms-lab/MME
+    split: test
+    purpose: 感知与认知细分能力
+    n_samples: 100
+
+# 与校准集的隔离说明
+isolation:
+  textvqa:
+    calib_split: validation
+    eval_split: test
+    overlap: none
+  其他:
+    说明: 校准用 COCO-Caption / DocVQA / VQAv2，评测用 MMBench / MME，无交集

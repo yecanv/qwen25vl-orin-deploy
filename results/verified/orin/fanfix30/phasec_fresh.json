@@ -1,0 +1,14 @@
+{
+  "config": "llama-server -np 2 -c 4096 重启后即测,MAXN_SUPER,风扇拉满",
+  "prompt_mode": "纯文本(与长稳同口径)",
+  "levels": {
+    "c4": {
+      "clients": 4,
+      "n_req": 74,
+      "wall_s": 188.6,
+      "aggregate_tps": 47.95,
+      "per_req_decode_tps_p50": 24.47,
+      "per_req_latency_p50_s": 10.3
+    }
+  }
+}

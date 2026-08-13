@@ -1,0 +1,8 @@
+golden: pixels(4096, 1176) grid[[1, 64, 64]] ref(1024, 2048)
+[对拍] 余弦相似度 = 0.124650   最大绝对误差 = 40.53369
+[时延] mean=739.01ms  p50=739.01ms  p95=741.92ms
+→ /home/nvidia/work/qwen25vl-orin-deploy/results/raw/vit_orin_verify.json
+Traceback (most recent call last):
+  File "/home/nvidia/work/qwen25vl-orin-deploy/vit_orin_verify.py", line 50, in <module>
+    assert cos > 0.999, "与桌面参考不一致，engine 有问题"
+AssertionError: 与桌面参考不一致，engine 有问题

@@ -1,0 +1,33 @@
+{
+  "model": "E:\\models\\qwen25vl-3b",
+  "target_group": "llm_mlp_down(36)",
+  "quant": "W8A8 sim: weight int8 per-row static, act int8 per-token dynamic",
+  "note": "down_proj 输入非 LayerNorm 直连,部署时 1/s 融合受限——本实验只看迁移机制",
+  "curve": [
+    {
+      "config": "s=1(裸W8A8)",
+      "alpha": null,
+      "kl_mean": 0.02342224948642979
+    },
+    {
+      "config": "α=0.3",
+      "alpha": 0.3,
+      "kl_mean": 0.011371699433880167
+    },
+    {
+      "config": "α=0.5",
+      "alpha": 0.5,
+      "kl_mean": 0.006243107912496271
+    },
+    {
+      "config": "α=0.7",
+      "alpha": 0.7,
+      "kl_mean": 0.006381390347996785
+    },
+    {
+      "config": "α=0.9",
+      "alpha": 0.9,
+      "kl_mean": 0.037625011573254596
+    }
+  ]
+}

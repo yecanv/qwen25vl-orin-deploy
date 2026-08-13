@@ -1,0 +1,25 @@
+0.00.917.986 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.02.830.962 I mtmd_cli_context: chat template example:
+<|im_start|>system
+You are a helpful assistant<|im_end|>
+<|im_start|>user
+Hello<|im_end|>
+<|im_start|>assistant
+Hi there<|im_end|>
+<|im_start|>user
+How are you?<|im_end|>
+<|im_start|>assistant
+
+0.02.833.868 W load_hparams: Qwen-VL models require at minimum 1024 image tokens to function correctly on grounding tasks
+0.02.833.874 W load_hparams: if you encounter problems with accuracy, try adding --image-min-tokens 1024
+0.02.833.875 W load_hparams: more info: https://github.com/ggml-org/llama.cpp/issues/16842
+
+0.03.871.654 I main: loading model: /home/nvidia/models/gguf/Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf
+0.03.871.904 W WARN: This is an experimental CLI for testing multimodal capability.
+0.03.871.906 W       For normal use cases, please use the standard llama-cli
+0.03.899.919 I encoding mtmd batch, n_chunks = 1 (done = 1, total = 3)
+0.06.481.745 I mtmd batch encoding done in 2581 ms
+
+这张图片展示了一个城市景观，背景是清澈的蓝天。前景中有一条灰色的道路，道路的两侧各有一辆汽车。左边的汽车是蓝色的，右边的汽车是紫色的。道路的中间有一排白色的斑马线，远处可以看到几栋高大的建筑物。建筑物的外墙是灰色的，窗户是黄色的，窗户上有一些黄色的灯光，显示出建筑物正在亮着灯。整体画面简洁明了，给人一种宁静的感觉。
+
+

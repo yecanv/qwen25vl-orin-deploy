@@ -1,0 +1,15 @@
+{
+  "windows_p50": {
+    "win0_2min": 26.49,
+    "win1_2min": 26.49,
+    "win2_2min": 26.47,
+    "win3_2min": 26.46,
+    "win4_2min": 26.47
+  },
+  "n_req": 131,
+  "gpu_temp_C": {
+    "max": 91.593,
+    "avg": 89.5
+  },
+  "power_mW_avg": 28267
+}

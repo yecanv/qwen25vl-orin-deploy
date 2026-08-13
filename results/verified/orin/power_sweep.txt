@@ -1,0 +1,20 @@
+NV Power Mode: 25W
+3
+--- mode 3 tg128 ---
+| ------------------------------ | ---------: | ---------: | ---------- | --: | --------------: | -------------------: |
+| qwen2vl ?B Q4_K - Medium       |   1.79 GiB |     3.09 B | CUDA       |  99 |           tg128 |         10.85 ± 0.00 |
+
+build: ddd4ec1 (1)
+NVPM WARN: Golden image context is already created
+NVPM WARN: Reboot required for changing to this power mode: 2
+NVPM WARN: DO YOU WANT TO REBOOT NOW? enter YES/yes to confirm:
+NVPM ERROR: optMask is 1, no request for power mode
+NV Power Mode: 25W
+3
+--- mode 2 tg128 ---
+| ------------------------------ | ---------: | ---------: | ---------- | --: | --------------: | -------------------: |
+| qwen2vl ?B Q4_K - Medium       |   1.79 GiB |     3.09 B | CUDA       |  99 |           tg128 |         10.85 ± 0.00 |
+
+build: ddd4ec1 (1)
+15W档(NV Power Mode: 15W):
+| qwen2vl ?B Q4_K - Medium       |   1.79 GiB |     3.09 B | CUDA       |  99 |           tg128 |          8.27 ± 0.05 |

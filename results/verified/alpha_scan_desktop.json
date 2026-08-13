@@ -1,0 +1,39 @@
+{
+  "model": "E:\\models\\qwen25vl-3b",
+  "calib": "calib/data/vl_calib_128.pt",
+  "target_group": "llm_mlp_down(36)",
+  "quant": "int4 symmetric group-128, equivalent transform w*s, s=mean|x|^alpha",
+  "n_probe": 8,
+  "curve": [
+    {
+      "alpha": 0.0,
+      "kl_mean": 0.02298007365607191,
+      "mse_mean": 0.7035892829298973
+    },
+    {
+      "alpha": 0.2,
+      "kl_mean": 0.02160620771246613,
+      "mse_mean": 0.21900389902293682
+    },
+    {
+      "alpha": 0.4,
+      "kl_mean": 0.0234650732454611,
+      "mse_mean": 0.2635516542941332
+    },
+    {
+      "alpha": 0.6,
+      "kl_mean": 0.036687687621451914,
+      "mse_mean": 0.8708588741719723
+    },
+    {
+      "alpha": 0.8,
+      "kl_mean": 0.06927024630567757,
+      "mse_mean": 1.8791726380586624
+    },
+    {
+      "alpha": 1.0,
+      "kl_mean": 0.11351708360598423,
+      "mse_mean": 1.2440573871135712
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "cos_vs_desktop_pytorch": 0.12465,
+  "max_abs_diff": 40.53369,
+  "latency_ms": {
+    "mean": 736.29,
+    "p50": 739.4,
+    "p95": 758.94,
+    "min": 649.83
+  },
+  "shape": "4096 patch / 1024 visual token (~896x896)",
+  "power_mode": "MAXN_SUPER + jetson_clocks",
+  "note": "IOutputAllocator 正规路径"
+}

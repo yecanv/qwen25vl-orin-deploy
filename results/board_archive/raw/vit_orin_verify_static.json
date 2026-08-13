@@ -1,0 +1,14 @@
+{
+  "cos_vs_desktop_pytorch": 0.999853,
+  "max_abs_diff": 1.59766,
+  "latency_ms": {
+    "mean": 750.59,
+    "p50": 750.74,
+    "p95": 754.64,
+    "min": 745.3
+  },
+  "engine": "vit_fp16_st.engine (grid常量化, L3)",
+  "shape": "4096 patch / 1024 visual token (~896x896)",
+  "power_mode": "MAXN_SUPER + jetson_clocks",
+  "note": "纯GPU计算时延(输入常驻显存); 输出经IOutputAllocator"
+}

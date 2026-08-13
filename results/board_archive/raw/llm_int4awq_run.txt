@@ -1,0 +1,25 @@
+[TensorRT-LLM][INFO] Context Chunking Scheduler Policy: None
+[TensorRT-LLM][INFO] Loaded engine size: 2624 MiB
+[TensorRT-LLM][INFO] [MemUsageChange] Allocated 580.44 MiB for execution context memory.
+[TensorRT-LLM][INFO] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +0, now: CPU 0, GPU 2615 (MiB)
+[TensorRT-LLM][INFO] [MemUsageChange] Allocated 1.57 MB GPU memory for runtime buffers.
+[TensorRT-LLM][INFO] [MemUsageChange] Allocated 8.55 MB GPU memory for decoder.
+[TensorRT-LLM][INFO] Memory usage when calculating max tokens in paged kv cache: total: 15.29 GiB, available: 7.20 GiB
+[TensorRT-LLM][INFO] Number of blocks in KV cache primary pool: 2952
+[TensorRT-LLM][INFO] Number of blocks in KV cache secondary pool: 0, onboard blocks to primary memory before reuse: true
+[TensorRT-LLM][INFO] Max KV cache pages per sequence: 64
+[TensorRT-LLM][INFO] Number of tokens per block: 64.
+[TensorRT-LLM][INFO] [MemUsageChange] Allocated 6.49 GiB for max tokens in paged KV cache (188928).
+[08/01/2026-05:44:11] [TRT-LLM] [I] Load engine takes: 4.551455736160278 sec
+Input [Text 0]: "<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+边缘计算设备上部署大语言模型的三个主要挑战是<|im_end|>
+<|im_start|>assistant
+"
+Output [Text 0 Beam 0]: "1. 计算资源限制：边缘计算设备通常具有有限的计算资源，包括处理能力、存储空间和带宽。这些限制可能会影响大语言模型的性能，因为它们需要大量的计算资源来运行。
+
+2. 数据隐私和安全：大语言模型需要访问和处理大量的用户数据，这可能涉及到隐私和安全问题。在边缘计算设备上部署大语言模型时，需要采取适当的措施来保护用户数据的安全和隐私。
+
+3. 时延问题：大语言模型需要实时处理用户输入并生成响应，因此需要低时延。然而，边缘计算设备通常具有较高的时延，这可能会影响大语言模型的实时性能。为了克服这个问题，需要优化模型的训练和推理过程，以减少时延。"
+batch_size: 1, avg latency of 10 iterations: : 4.359697389602661 sec

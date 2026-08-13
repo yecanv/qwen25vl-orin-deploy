@@ -1,0 +1,13 @@
+{
+  "patch_dim": 1176,
+  "merge_size": 2,
+  "hidden": 2048,
+  "opt": {
+    "t": 1,
+    "h": 64,
+    "w": 64,
+    "n_patches": 4096,
+    "n_visual_tokens": 1024
+  },
+  "hint": "build_vit_engine.sh \u7528 opt.n_patches \u4f5c optShapes"
+}

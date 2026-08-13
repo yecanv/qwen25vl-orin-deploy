@@ -1,0 +1,5 @@
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+[单图448x448] seq_len=279  position_ids 一致: True  delta ours=-240 ref=-240 一致: True
+[双图448+308x224] seq_len=369  position_ids 一致: True  delta ours=-317 ref=-317 一致: True
+[纯文本] seq_len=21  position_ids 一致: True  delta ours=0 ref=0 一致: True
+自检通过：3 组用例 position_ids 与 mrope_delta 全部与 HF 一致

@@ -1,0 +1,18 @@
+# 桌面端（量化阶段）
+torch>=2.3.0
+transformers>=4.49.0          # Qwen2.5-VL 支持从 4.49 起
+accelerate>=0.30.0
+datasets>=2.19.0
+pillow>=10.0.0
+qwen-vl-utils>=0.0.8
+nvidia-modelopt[torch]>=0.19.0
+onnx>=1.16.0
+onnxruntime>=1.18.0
+
+# 评测
+Levenshtein>=0.25.0
+numpy>=1.24.0
+matplotlib>=3.8.0
+
+# Jetson 端另装（不要用 pip 装 torch，必须用 NVIDIA 提供的 aarch64 wheel）
+#   见 docs/01_setup_troubleshooting.md

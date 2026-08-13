@@ -1,0 +1,24 @@
+D:\APP\AboutCode\Miniconda3\envs\qwen_trt\Lib\site-packages\transformers\models\auto\modeling_auto.py:2284: FutureWarning: The class `AutoModelForVision2Seq` is deprecated and will be removed in v5.0. Please use `AutoModelForImageTextToText` instead.
+  warnings.warn(
+`torch_dtype` is deprecated! Use `dtype` instead!
+[static] 固定档: grid=(1,64,64) patches=4096 tokens=1024
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.04s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.81s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.84s/it]
+F:\qwen25vl-build\convert\export_vit_onnx_static.py:73: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(
+D:\APP\AboutCode\Miniconda3\envs\qwen_trt\Lib\site-packages\transformers\models\qwen2_5_vl\modeling_qwen2_5_vl.py:338: TracerWarning: Iterating over a tensor might cause the trace to be incorrect. Passing a tensor of different shape won't change the number of iterations executed (and might lead to errors or silently give incorrect results).
+  for t, h, w in grid_thw:
+D:\APP\AboutCode\Miniconda3\envs\qwen_trt\Lib\site-packages\transformers\models\qwen2_5_vl\modeling_qwen2_5_vl.py:371: TracerWarning: Iterating over a tensor might cause the trace to be incorrect. Passing a tensor of different shape won't change the number of iterations executed (and might lead to errors or silently give incorrect results).
+  for grid_t, grid_h, grid_w in grid_thw:
+D:\APP\AboutCode\Miniconda3\envs\qwen_trt\Lib\site-packages\transformers\models\qwen2_5_vl\modeling_qwen2_5_vl.py:400: TracerWarning: Converting a tensor to a Python list might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  cu_window_seqlens.extend(cu_seqlens_tmp.tolist())
+D:\APP\AboutCode\Miniconda3\envs\qwen_trt\Lib\site-packages\transformers\models\qwen2_5_vl\modeling_qwen2_5_vl.py:401: TracerWarning: Converting a tensor to a Python number might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  window_index_id += (grid_t * llm_grid_h * llm_grid_w).item()
+D:\APP\AboutCode\Miniconda3\envs\qwen_trt\Lib\site-packages\transformers\models\qwen2_5_vl\modeling_qwen2_5_vl.py:420: TracerWarning: torch.tensor results are registered as constants in the trace. You can safely ignore this warning if you use this function to create tensors out of constant variables that would be the same every time you call this function. In any other case, this might cause the trace to be incorrect.
+  cu_window_seqlens = torch.tensor(
+D:\APP\AboutCode\Miniconda3\envs\qwen_trt\Lib\site-packages\transformers\models\qwen2_5_vl\modeling_qwen2_5_vl.py:241: TracerWarning: Converting a tensor to a Python list might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  torch.split(tensor, lengths.tolist(), dim=2) for tensor in (query_states, key_states, value_states)
+[static] 前向自检 输出 (1024, 2048)
+[static] 导出 → onnx\vit_fp16_static.onnx
+[static] 契约 → onnx\vit_fp16_static.shapes.json
+[static] ORT vs 黄金参考 余弦 = 0.999977
+[static] ORT 校验通过

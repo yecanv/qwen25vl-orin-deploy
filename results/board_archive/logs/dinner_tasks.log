@@ -1,0 +1,17 @@
+[A] ncu full 采样 fused_match_kernel 18:49:16
+ncu exit=0 18:49:40
+-rw-r--r-- 1 root root 4.7M  8月  4 18:49 /home/nvidia/work/qwen25vl-orin-deploy/results/raw/ncu_token_merge_full.ncu-rep
+    Memory Throughput                 %        64.37
+    Duration                         ms         4.29
+    Compute (SM) Throughput           %        59.78
+    Achieved Occupancy                        %        32.38
+    Memory Throughput                 %        64.01
+    Duration                         ms         4.27
+A_DONE
+[B] timing cache 两连建 18:49:41
+build1 exit=0 19:45:58
+build2 exit=0 20:35:09
+[08/04/2026-19:45:46] [I] Engine built in 3360.2 sec.
+[08/04/2026-20:35:03] [I] Engine built in 2940.58 sec.
+-rw-rw-r-- 1 nvidia nvidia 4.8M  8月  4 20:35 /home/nvidia/work/qwen25vl-orin-deploy/results/raw/vit_l2.timingcache
+DINNER_TASKS_DONE 20:35:09

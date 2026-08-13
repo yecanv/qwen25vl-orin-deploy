@@ -1,0 +1,15 @@
+[sudo] password for nvidia: ==PROF== Connected to process 40441 (/usr/bin/python3.10)
+==PROF== Profiling "fused_match_kernel": 0%....50%....100% - 31 passes
+==PROF== Profiling "fused_match_kernel": 0%....50%....100% - 30 passes
+==PROF== Profiling "fused_match_kernel": 0%....50%....100% - 31 passes
+      N      D     融合(ms)     朴素(ms)      加速       S矩阵   argmax一致
+--------------------------------------------------------------------
+   1024   2048     4.2719     1.5278   0.36x     1.05M     100.0%
+
+→ results/raw/kernel_bench.json
+
+提醒：Nsight Compute 再跑一遍，拿到 dram__throughput 和 SM 利用率，
+      面试问'你怎么知道优化生效了'要用这个答。
+  ncu --set full --kernel-name fused_match_kernel python bench_kernel.py
+==PROF== Disconnected from process 40441
+==PROF== Report: /home/nvidia/work/qwen25vl-orin-deploy/results/raw/ncu_token_merge_full.ncu-rep
