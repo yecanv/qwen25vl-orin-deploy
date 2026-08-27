@@ -1,8 +1,8 @@
-# 实测数据台账(截至 2026-08-11 寄板)
+# 实测数据台账(寄板前定稿)
 
 > 用途:每个对外引用的数字 → 原始文件 → 口径 → 副本位置,一查即达。
-> 副本约定:**仓库** = 本 results/(git 版本化);**E 盘** = E:\jetson_board_backup_2026-08-11\(全量快照 + post_backup_additions 补充);**存档** = results/board_archive/(带 md5 清单的早期归档)。
-> 板卡 2026-08-11 寄回,板上数据此后不再是副本。
+> 副本约定:**仓库** = 本 results/(git 版本化);**E 盘** = E:\jetson_board_backup\(全量快照 + post_backup_additions 补充);**存档** = results/board_archive/(带 md5 清单的早期归档)。
+> 板卡寄回,板上数据此后不再是副本。
 
 ## 一、engine 端(TensorRT / TensorRT-LLM 链路)
 
@@ -43,7 +43,7 @@
 | 延迟/TPOT 分位数与失败率(两组长稳) | TPOT=每请求均值口径 | verified/orin/latency_quantiles_longrun.json(存档 CSV 现算) | 仓库+E |
 | 能效 0.95 tok/J / 功耗三档 | 均功耗 27.9W;三档实录 MAXN_SUPER 26.5 / 25W 10.85 / 15W 8.27 tok/s | longrun_summary.json + verified/orin/power_sweep.txt | 仓库+E+存档 |
 
-## 三-补、寄板前 24h 补测(2026-08-12,return_day2/)
+## 三-补、寄板前 24h 补测(return_day2/)
 
 | 数字 | 口径 | 文件 |
 |---|---|---|
@@ -66,14 +66,14 @@
 | 敏感度/outlier 1.59e6@llm_mlp_down | verified/sensitivity_desktop.json |
 | 融合算子 bench | verified/kernel_bench_desktop.json + orin/kernel_bench_orin.json |
 
-## 五、多图与混合端到端(2026-08-11)
+## 五、多图与混合端到端
 
 | 内容 | 文件 |
 |---|---|
 | llama.cpp 串扰三次修订(触发条件+解法) | verified/orin/fanfix30/multiimg_synthetic_test.json |
 | HF 参考双图零串扰 | verified/hf_multiimg_e2e.json |
 | 混合端到端(板端 TRT 特征+HF LLM,余弦 0.9997) | verified/hybrid_trt_vit_multiimg.json + multiimg_vit_embeds.npz |
-| **混合端到端实测(TRT ViT→llama.cpp LLM,板上原生,2026-08-12)**:TTFT≈1.9s(741ms ViT+1133ms prefill,未含预处理)vs 纯链 3.59s;decode 25.8~26.0;双图判据 PASS 零串扰 | verified/orin/return_day2/hybrid_llamacpp_e2e.json + runtime/hybrid_driver.cpp + stderr_a/b.log |
+| **混合端到端实测(TRT ViT→llama.cpp LLM,板上原生)**:TTFT≈1.9s(741ms ViT+1133ms prefill,未含预处理)vs 纯链 3.59s;decode 25.8~26.0;双图判据 PASS 零串扰 | verified/orin/return_day2/hybrid_llamacpp_e2e.json + runtime/hybrid_driver.cpp + stderr_a/b.log |
 | 引擎输入(复现实验用) | E 盘 post_backup_additions/hybrid_inputs.npz |
 | 位置编码对拍/胶水/执行测试 | runtime/mrope_multiimg_check.py、test_multiimg_glue.py、test_run_vl_multiimg_exec.py(脚本即记录,输出见 git 提交说明) |
 

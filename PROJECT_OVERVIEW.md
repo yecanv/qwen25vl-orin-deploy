@@ -146,7 +146,7 @@ Y=KL 散度即代价）。**该决策现已有双重支撑:敏感度分析之外
 `calib/build_vl_calib.py` 构建图文混合校准集（COCO-Caption / TextVQA /
 DocVQA / VQAv2 混采），并提供 `--text-only-ablation` 生成纯文本对照组。
 
-**对照实验已于 2026-08-05 完成(桌面伪量化口径),直觉未被复现**——纯文本校准在图文探针上并不更差,机制为视觉巨激活抬高 mean|x| 导致固定 α 下图文校准过保护(results/verified/calib_ablation_desktop.json);
+**对照实验已完成(桌面伪量化口径),直觉未被复现**——纯文本校准在图文探针上并不更差,机制为视觉巨激活抬高 mean|x| 导致固定 α 下图文校准过保护(results/verified/calib_ablation_desktop.json);
 跑之前只是一个基于激活分布差异的合理推断。
 
 校准集/评测集隔离机制已实现（图片指纹去重），同样需实跑验证。

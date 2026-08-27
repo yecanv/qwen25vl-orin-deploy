@@ -2,7 +2,7 @@
 
 > 结论:技术可行但不划算——外置 RoPE(周级、KV cache 簿记复杂、不支持分支)vs
 > 刷 JetPack 7 走 Edge-LLM 官方支持(半天、已知可行)。研判本身把"0.12 缺 mrope"
-> 从文档引用升级为 plugin 签名级判断。日期 2026-08-12。
+> 从文档引用升级为 plugin 签名级判断。
 
 ## 源码证据(对比 v0.12.0-jetson vs v0.15.0 的 functional.py)
 

@@ -1,6 +1,6 @@
 # 混合端到端:TRT ViT → llama.cpp LLM(公开 API 集成)✅ 已实测通过
 
-> **2026-08-12 板上实测 PASS**:手写 C++ 驱动(runtime/hybrid_driver.cpp,~170行,零改
+> **板上实测 PASS**:手写 C++ 驱动(runtime/hybrid_driver.cpp,~170行,零改
 > llama.cpp 源码)一次编译一次运行,双图判据全过(与 HF 参考逐物一致、零串扰)。
 > **TTFT ≈1.9s(741ms ViT + 1133ms prefill,分段实测之和)vs 纯 llama.cpp 链 3.59s,
 > 提速约 1.7~1.9 倍**(口径:未含预处理,对照值含;详见 results/.../hybrid_llamacpp_e2e.json)。
