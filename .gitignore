@@ -6,3 +6,5 @@ calib/data/
 kernels/build/
 __pycache__/
 *.pyc
+.build/
+cpp/build/

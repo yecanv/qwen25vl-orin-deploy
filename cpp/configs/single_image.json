@@ -1,0 +1,12 @@
+{
+  "vision_engine": "engines/vit_fp16_st.engine",
+  "vision_contract": "onnx/vit_fp16_static.shapes.json",
+  "model": "models/Qwen2.5-VL-3B-Instruct-Q4_K_M.gguf",
+  "image": "assets/demo896.jpg",
+  "prompt": "请描述这张图片。",
+  "max_new_tokens": 256,
+  "ctx_size": 4096,
+  "batch_size": 2048,
+  "gpu_layers": 99,
+  "threads": 0
+}

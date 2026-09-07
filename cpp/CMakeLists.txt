@@ -1,0 +1,88 @@
+cmake_minimum_required(VERSION 3.20)
+project(qwen_vl_runtime VERSION 0.1.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+include(CTest)
+
+option(QWEN_BUILD_INFERENCE "Link the actual TensorRT + llama.cpp inference executable" OFF)
+option(QWEN_CHECK_INFERENCE "Compile inference translation units against real headers, without linking" OFF)
+set(LLAMA_ROOT "" CACHE PATH "llama.cpp checkout/install root")
+set(TENSORRT_ROOT "" CACHE PATH "TensorRT SDK root")
+
+function(qwen_warnings target)
+    if(MSVC)
+        target_compile_options(${target} PRIVATE /W4 /utf-8 /permissive-)
+        target_compile_definitions(${target} PRIVATE NOMINMAX _CRT_SECURE_NO_WARNINGS)
+    else()
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+endfunction()
+
+add_library(qwen_core src/preprocess.cpp src/mrope.cpp)
+target_include_directories(qwen_core PUBLIC include)
+qwen_warnings(qwen_core)
+add_library(qwen_io src/io.cpp src/options.cpp)
+target_link_libraries(qwen_io PUBLIC qwen_core)
+target_include_directories(qwen_io SYSTEM PRIVATE third_party)
+qwen_warnings(qwen_io)
+add_executable(qwen_preprocess apps/preprocess_cli.cpp)
+target_link_libraries(qwen_preprocess PRIVATE qwen_io)
+qwen_warnings(qwen_preprocess)
+
+if(BUILD_TESTING)
+    foreach(test_name IN ITEMS preprocess mrope io options)
+        add_executable(test_${test_name} tests/test_${test_name}.cpp)
+        target_link_libraries(test_${test_name} PRIVATE qwen_io)
+        qwen_warnings(test_${test_name})
+        add_test(NAME ${test_name} COMMAND test_${test_name})
+    endforeach()
+    add_test(NAME preprocess_help COMMAND qwen_preprocess --help)
+    add_test(NAME preprocess_missing_args COMMAND qwen_preprocess)
+    set_tests_properties(preprocess_missing_args PROPERTIES WILL_FAIL TRUE)
+endif()
+
+if(QWEN_BUILD_INFERENCE OR QWEN_CHECK_INFERENCE)
+    find_package(CUDAToolkit REQUIRED)
+    find_path(TENSORRT_INCLUDE_DIR NvInfer.h HINTS "${TENSORRT_ROOT}/include" REQUIRED)
+    find_path(LLAMA_INCLUDE_DIR llama.h HINTS "${LLAMA_ROOT}/include" REQUIRED)
+    find_path(GGML_INCLUDE_DIR ggml.h HINTS "${LLAMA_ROOT}/ggml/include" "${LLAMA_ROOT}/include" REQUIRED)
+    add_library(qwen_inference_objects OBJECT src/vit_engine.cpp src/llama_decoder.cpp)
+    target_include_directories(qwen_inference_objects PUBLIC include)
+    target_include_directories(qwen_inference_objects SYSTEM PRIVATE
+        "${TENSORRT_INCLUDE_DIR}" "${LLAMA_INCLUDE_DIR}" "${GGML_INCLUDE_DIR}" "${CUDAToolkit_INCLUDE_DIRS}")
+    qwen_warnings(qwen_inference_objects)
+
+    # Object compilation catches syntax/type/API errors without pretending to
+    # validate linker ABI, engine deserialization, CUDA execution or model output.
+    add_library(qwen_cli_object OBJECT apps/vlm_cli.cpp)
+    target_include_directories(qwen_cli_object PRIVATE include)
+    target_include_directories(qwen_cli_object SYSTEM PRIVATE third_party)
+    qwen_warnings(qwen_cli_object)
+    add_custom_target(check_inference DEPENDS qwen_inference_objects qwen_cli_object)
+
+    if(QWEN_BUILD_INFERENCE)
+        find_library(TENSORRT_LIBRARY NAMES nvinfer nvinfer_10 HINTS
+            "${TENSORRT_ROOT}/lib" "${TENSORRT_ROOT}/lib64" REQUIRED)
+        find_library(LLAMA_LIBRARY NAMES llama HINTS
+            "${LLAMA_ROOT}/build/src" "${LLAMA_ROOT}/build/src/Release"
+            "${LLAMA_ROOT}/build/bin" "${LLAMA_ROOT}/build/bin/Release" "${LLAMA_ROOT}/lib" REQUIRED)
+        # ggml_backend_load_all is called directly by our decoder. Do not rely
+        # on transitive shared-library dependencies to resolve that symbol.
+        find_library(GGML_LIBRARY NAMES ggml HINTS
+            "${LLAMA_ROOT}/build/ggml/src" "${LLAMA_ROOT}/build/ggml/src/Release"
+            "${LLAMA_ROOT}/build/bin" "${LLAMA_ROOT}/build/bin/Release" "${LLAMA_ROOT}/lib" REQUIRED)
+        if(UNIX AND (LLAMA_LIBRARY MATCHES "\\.a$" OR GGML_LIBRARY MATCHES "\\.a$"))
+            message(FATAL_ERROR "This integration requires shared llama.cpp/ggml libraries. Rebuild llama.cpp with BUILD_SHARED_LIBS=ON.")
+        endif()
+        add_executable(vlm_cli $<TARGET_OBJECTS:qwen_cli_object> $<TARGET_OBJECTS:qwen_inference_objects>)
+        target_link_libraries(vlm_cli PRIVATE qwen_io CUDA::cudart "${TENSORRT_LIBRARY}" "${LLAMA_LIBRARY}" "${GGML_LIBRARY}")
+        if(UNIX)
+            get_filename_component(_llama_libdir "${LLAMA_LIBRARY}" DIRECTORY)
+            get_filename_component(_trt_libdir "${TENSORRT_LIBRARY}" DIRECTORY)
+            get_filename_component(_ggml_libdir "${GGML_LIBRARY}" DIRECTORY)
+            set_target_properties(vlm_cli PROPERTIES BUILD_RPATH "${_llama_libdir};${_trt_libdir};${_ggml_libdir}")
+        endif()
+    endif()
+endif()

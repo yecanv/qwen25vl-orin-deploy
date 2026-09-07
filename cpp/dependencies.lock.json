@@ -1,0 +1,65 @@
+{
+  "llama": {
+    "repository": "ggml-org/llama.cpp",
+    "revision": "ddd4ec1428a6201e18975ea52b07c71e0f9aef26",
+    "headers": {
+      "include/llama-cpp.h": "c48fd31095d2403a3bf7cbe98333ba0e61a398ee6e83b56f9d8b7237143b9877",
+      "include/llama.h": "3c119bd2e6d4d716801d4eaaef5aba3b4ebcb864e723b7080b10801d3790ba53",
+      "ggml/include/ggml-alloc.h": "94e4cd069b9313b2ceb35dacec901981e0bb478d8bb31035b7126be091998c23",
+      "ggml/include/ggml-backend.h": "a620e815b43a44cc72d5f216629a3a91980335b61bc37eb6b2d0813368c3704f",
+      "ggml/include/ggml-blas.h": "e76cb8594dc9866d99e7d63191b9fff6ab8b50244b4a28ce3af0f962964a6b5b",
+      "ggml/include/ggml-cann.h": "2cdb134f27fe5c4ec19d52f1eb58f5355aa42b8f54bf385f0e487501c5df7362",
+      "ggml/include/ggml-cpp.h": "bc15ba002c68685df23faae42df0d2b3d58032011f88b649021ab92485862c72",
+      "ggml/include/ggml-cpu.h": "316279e004cdeb8e6ef78599acb602bf79a8abdf897fed9fd1914808c1518c6e",
+      "ggml/include/ggml-cuda.h": "9cbfcea49f6da4d07f41dc22fa8dbf870825faaa2a68e34e65fe30ea6c41e042",
+      "ggml/include/ggml-et.h": "33118c0642b8059a99ea930fd4e4a045e78ccb41760b173ede221f1297c35977",
+      "ggml/include/ggml-hexagon.h": "b2c12bac390f14707b16bdd27c8c75ce4f075ed509c729ee28fd4f03b17e7375",
+      "ggml/include/ggml-metal.h": "322f36cd30f3e9e7aad7b5b9bc63078012fd0b7706ac4e24f5721b604f3d8980",
+      "ggml/include/ggml-opencl.h": "8e443e1aa9c8bc6e0cf116c4cc3f42f4858938fa15e65b06bc07b26686e1233a",
+      "ggml/include/ggml-openvino.h": "c2e3f301e28ad815b4285888aad6130808a77e6acb4e8b558de63a648cf9743e",
+      "ggml/include/ggml-opt.h": "3586de1bc8a934b5c72339e2b6937b0641e8f149b512231e666f67de0736eea2",
+      "ggml/include/ggml-rpc.h": "7dc6f23a8b5c593bd6a3e02803aeb8861744d8c8219d0a544fa844879677ba1f",
+      "ggml/include/ggml-sycl.h": "58429f8045b335f5e740faa2198caf72ba3beb04df0eb970103b932340daca8b",
+      "ggml/include/ggml-virtgpu.h": "ed231e7db3f0f58b84073f5ee67f9ec9d63046d1a7ed091c36a6cfe9f685a463",
+      "ggml/include/ggml-vulkan.h": "7eae5dad2cc7bb4d3eca828539f441816d5fd59fdc7b224d49aa229fc7b7248c",
+      "ggml/include/ggml-webgpu.h": "a91d855313a9e85e75ba597ff869a267247dea936a2c0faef03aeb7f1ea6e79c",
+      "ggml/include/ggml-zdnn.h": "ee1d79c95ade45ba195a6b71f59a05c18617de4a596d2b2b03ecf38975a9a448",
+      "ggml/include/ggml-zendnn.h": "2cb034b842438281616ce647232d922fb224450323f0d422d2af567c334aa8ff",
+      "ggml/include/ggml.h": "c65c30fdb4dce95eac71c26bb38ae8423fbc80d79db91d2b2ffaea8c4e46276a",
+      "ggml/include/gguf.h": "e56714aab702e5ce62ee587a409643c08f7e93e8fbb77f48ef7cc85075f96fa4"
+    }
+  },
+  "tensorrt": {
+    "repository": "NVIDIA/TensorRT",
+    "revision": "5b990f0a739d8faf962dfe54f4829942633c639c",
+    "release": "10.3",
+    "headers": {
+      "include/NvInfer.h": "dcb76542689a8e2b3575f2e92105f3fda8251e6de8251d956ece20a7c39c4ae1",
+      "include/NvInferConsistency.h": "2f496c1eecaddd9e8ba400fb79dcc2ed5250e52b05fc27dea25c170da408ed8d",
+      "include/NvInferConsistencyImpl.h": "482ee614e03f0802fd51b703b7935c5b48f2ad4a08a5d147d65117766f6daf84",
+      "include/NvInferImpl.h": "a087b95461cefbb7cd5f0c068a205fe845fe1f47ced4710d3b3e8a8fbcac1ef8",
+      "include/NvInferLegacyDims.h": "e750b4ff4bb726a2ecddef9ced01ec4ee23eedddb77c433d98b558b471db6ebe",
+      "include/NvInferPlugin.h": "b3290404a076f3492dc627ffdfc3b1fa803ea0eccc49f23986d645a2d23a63c7",
+      "include/NvInferPluginUtils.h": "c1aeed090422a0f214aa3dc334d3e435f3dd3a6cf14caece9fe9ef4daeeb50ec",
+      "include/NvInferRuntime.h": "397a64510a7a3fdf2b77bf63f9a3d137d028c6181c76b8932d39a9ba938b5e07",
+      "include/NvInferRuntimeBase.h": "d7a6dc0c2e9e755f91db8fe6811ee9f871375bd745aca7ffc5d540d14cc369db",
+      "include/NvInferRuntimeCommon.h": "75447ea65eb575ed92e98096b11b3e39d6e2a15fec65f85da9fd6f163c250370",
+      "include/NvInferRuntimePlugin.h": "6776cd7e27fc4437f64f116352541fc396999a7363b0eaf6fb5d80513653d149",
+      "include/NvInferSafeRuntime.h": "1992704e0eec1441bcd154501355e9e3b5ac2f75a78e733231e6cf53d58ec918",
+      "include/NvInferVersion.h": "54f35bf74a8837581fbcab8cfe0e35c7730be76a8cb2095b0a6f180457221c1d",
+      "include/NvOnnxConfig.h": "c1476d809a528fc70213b77442e067ce89088d2a89b74cb07b1b72f1b3c8d5fa"
+    }
+  },
+  "vendored": {
+    "stb_image.h": {
+      "source": "https://raw.githubusercontent.com/nothings/stb/2c980bb59875b0d32144a71867fbdebb2f77cd20/stb_image.h",
+      "license": "MIT or public domain",
+      "sha256": "594c2fe35d49488b4382dbfaec8f98366defca819d916ac95becf3e75f4200b3"
+    },
+    "json.hpp": {
+      "source": "https://raw.githubusercontent.com/nlohmann/json/v3.11.3/single_include/nlohmann/json.hpp",
+      "license": "MIT",
+      "sha256": "9bea4c8066ef4a1c206b2be5a36302f8926f7fdc6087af5d20b417d0cf103ea6"
+    }
+  }
+}
