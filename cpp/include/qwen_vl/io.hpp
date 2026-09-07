@@ -14,6 +14,7 @@ struct EngineContract {
 };
 
 Image read_image(const std::string& path);
+Image decode_image(const std::vector<std::uint8_t>& encoded);
 EngineContract read_engine_contract(const std::string& path);
 void write_pixels(const std::string& path, const VisionInput& input);
 

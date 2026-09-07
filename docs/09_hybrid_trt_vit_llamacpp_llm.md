@@ -78,11 +78,6 @@ pos[i + N*3    ] = z   // 块3  = 0(未用)
   全 Python 原型:TRT ViT(pycuda)→ numpy 特征 → llama_batch → decode。天级出原型。
 - **B**:C++ 驱动链接 TensorRT + llama.cpp,性能最优,需编译。
 
-## 剩余待验证暗礁
-
-1. **特征数值对齐**:TRT ViT 输出维度天然对上 LLM 隐层(2048);数值约定 vs mmproj
-   需实测(同源权重,已由 TRT ViT→HF LLM 零串扰间接背书)。
-
 ## 三条端到端路线对比
 
 | 路线 | 工期 | 性质 | 优劣 |

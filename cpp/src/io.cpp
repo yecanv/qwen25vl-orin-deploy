@@ -26,17 +26,23 @@ Image read_image(const std::string& path) {
     stream.seekg(0);
     if (!stream.read(reinterpret_cast<char*>(encoded.data()), length))
         throw std::runtime_error("Cannot read complete image: " + path);
+    return decode_image(encoded);
+}
+
+Image decode_image(const std::vector<std::uint8_t>& encoded) {
+    if (encoded.empty() || encoded.size() > 128U * 1024U * 1024U)
+        throw std::invalid_argument("Encoded image must contain 1..128 MiB");
     int width = 0, height = 0, channels = 0;
     const int size = static_cast<int>(encoded.size());
     if (!stbi_info_from_memory(encoded.data(), size, &width, &height, &channels))
-        throw std::runtime_error("Unsupported or invalid image: " + path);
+        throw std::invalid_argument("Unsupported or invalid encoded image");
     constexpr std::int64_t max_pixels = 64 * 1024 * 1024;
     if (width <= 0 || height <= 0 || static_cast<std::int64_t>(width) * height > max_pixels)
-        throw std::runtime_error("Decoded image must contain 1..64M pixels");
+        throw std::invalid_argument("Decoded image must contain 1..64M pixels");
     using PixelPtr = std::unique_ptr<stbi_uc, decltype(&stbi_image_free)>;
     PixelPtr data(stbi_load_from_memory(encoded.data(), size, &width, &height,
                                        &channels, 3), stbi_image_free);
-    if (!data) throw std::runtime_error("Image decoding failed: " + path);
+    if (!data) throw std::invalid_argument("Image decoding failed");
     Image result;
     result.width = width;
     result.height = height;

@@ -51,6 +51,13 @@
     }
   },
   "vendored": {
+    "httplib.h": {
+      "source": "https://raw.githubusercontent.com/yhirose/cpp-httplib/v0.20.1/httplib.h",
+      "license": "MIT",
+      "upstream_sha256": "7d3f813d05dad23b9c66eb6d9c1ff3d66f6acfaf6e5900ce960f7990e78079ea",
+      "sha256": "b5594aceae2f981739528e4c82037047a2aed996603868aa80cf8338954ddf6a",
+      "local_patch": "Server::listen_internal accept-error branch atomically exchanges svr_sock_ with INVALID_SOCKET before closing the listener."
+    },
     "stb_image.h": {
       "source": "https://raw.githubusercontent.com/nothings/stb/2c980bb59875b0d32144a71867fbdebb2f77cd20/stb_image.h",
       "license": "MIT or public domain",

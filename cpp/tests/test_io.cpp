@@ -31,6 +31,22 @@ int main() {
         const auto image = qwen_vl::read_image(image_path.string());
         require(image.width == 2 && image.height == 1 && image.rgb.size() == 6, "PPM shape");
         require(image.rgb[0] == 255 && image.rgb[4] == 127 && image.rgb[5] == 255, "RGB channel order");
+        const std::string header = "P6\n2 1\n255\n";
+        std::vector<std::uint8_t> encoded(header.begin(), header.end());
+        encoded.insert(encoded.end(), image.rgb.begin(), image.rgb.end());
+        const auto decoded = qwen_vl::decode_image(encoded);
+        require(decoded.width == image.width && decoded.height == image.height &&
+                decoded.rgb == image.rgb, "HTTP image bytes match file decoding");
+        const auto invalid_image = [](const std::vector<std::uint8_t>& bytes) {
+            bool invalid = false;
+            try { qwen_vl::decode_image(bytes); }
+            catch (const std::invalid_argument&) { invalid = true; }
+            require(invalid, "Invalid image must map to a client error");
+        };
+        invalid_image({});
+        invalid_image({1, 2, 3});
+        const std::string oversized = "P6\n9000 9000\n255\n";
+        invalid_image({oversized.begin(), oversized.end()});
         const auto contract_path = dir / "shape.json";
         const std::string good = R"({"static":true,"patch_dim":1176,"grid_thw":[1,64,64],"input":{"pixel_values":[4096,1176]},"output":{"vision_embeds":[1024,2048]}})";
         auto write_contract = [&](const std::string& content) { std::ofstream file(contract_path); file << content; };

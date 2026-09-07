@@ -64,4 +64,3 @@ Python 版见 `serving/vlm_client_demo.py`(自动读图转 base64、打印用量
 - 无鉴权、无限流、无 TLS(局域网内演示级)
 - 无进程守护/自动重启(systemd unit 未写)
 - 无请求日志与监控落盘(`--metrics` 端点开着但没接采集)
-- C++ 自研网关未做(当前直接用 llama-server)

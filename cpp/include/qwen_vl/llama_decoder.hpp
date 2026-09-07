@@ -38,6 +38,11 @@ struct GenerationResult {
     GenerationTiming timing;
 };
 
+struct GenerationControl {
+    int max_new_tokens = -1;
+    std::function<bool()> stop_requested;
+};
+
 // Loads the GGUF once; each generate call creates an isolated context and uses greedy
 // decoding. This class supports single-image requests; calls must not overlap.
 class LlamaDecoder {
@@ -51,7 +56,8 @@ public:
 
     GenerationResult generate(
         const VisionFeatures& features, const Grid& grid, const std::string& question,
-        const std::function<void(const std::string&)>& on_piece = {});
+        const std::function<void(const std::string&)>& on_piece = {},
+        const GenerationControl& control = {});
 
 private:
     struct Impl;

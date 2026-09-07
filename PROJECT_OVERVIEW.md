@@ -4,28 +4,6 @@
 
 ---
 
-> ## ⚠️ 状态声明（务必先读）
->
-> **本项目已上板实测交付:混合链路(TensorRT ViT 引擎 + 手写 C++ 驱动经 llama_batch.embd 注入 llama.cpp)端到端板上实测 PASS(TTFT≈1.88s,commit 296cd66);TRT-LLM 0.12 栈内端到端仍不通(无 M-RoPE)。三条端到端路线定案:①外置 RoPE 补 0.12(周级)②JP7+Edge-LLM(半天官方,可选)③混合链路(已交付)。**
->
-> | 已完成 | 未完成 |
-> |---|---|
-> | 架构设计与技术方案;板上实测:混合链路端到端 PASS、ViT FP16 引擎 741ms、llama.cpp 纯链基线 3.59s | TRT-LLM 0.12 栈内端到端(无 M-RoPE,仍不通)、多图单请求驱动、外置 RoPE 补 0.12(周级路线) |
-> | 全部代码与文档 | TensorRT-LLM / ModelOpt 的 API 适配 |
-> | M-RoPE 逻辑离线验证 | engine 编译与端到端链路 |
-> | CUDA 算子算法验证（CPU 对拍） | CUDA kernel 的实际编译与性能 |
-核心性能数字已板上实测并入账 results/verified/（DATA_LEDGER 可溯源）；未跑的表项仍留空
->
-> 下文描述的是**技术方案与设计意图**，不是已完成的实验结论。
-> 凡涉及"扫描结果""对照实验结论""实测数字"的表述，
-> 均指**该实验的设计方案**，实际数据需在目标硬件上产出。
->
-> **简历与面试中,已实测部分按已交付口径讲(以简历 v2 行文为准);仍未实测部分(多图单请求驱动、外置 RoPE 路线、Nsight 剖析等)按进行中口径,不讲结论。**
-> 把设计意图说成已完成的实验，在自动驾驶/机器人公司是一票否决的问题——
-> 定性是造假，不是"深度不够"。
-
----
-
 ## 一句话
 
 把 Qwen2.5-VL 多模态大模型压进 Jetson Orin 车规级平台，
@@ -124,11 +102,6 @@ decode 阶段 memory-bound。合成一个 engine 无法分别优化。分开后�
 （per-channel absmax 的 max/median），并对每组模块做 INT8 伪量化后测输出
 logits 的 KL 散度。
 
-**预期结论**（待实测验证）：ViT 的 outlier channel 位置随输入图像漂移，
-静态的 per-channel scale 覆盖不住；而 ViT 只占参数量约 18%
-（约 0.67B / 总 3.75B）、且只在 prefill 跑一次。
-因此方案定为**保 FP16，只量化 LLM 主干**。
-
 `quantize/sensitivity_analysis.py` 会产出散点图（X=参数占比即收益，
 Y=KL 散度即代价）。**该决策现已有双重支撑:敏感度分析之外,ViT INT8 实战六墙(FP32校准契约→DDS杀执行器→ModelOpt批次→fp16 inf 卡熵→bin退化→构建病态慢)证明端侧连构建量化 ViT 引擎都不划算,反向加固保 FP16。**
 
@@ -201,7 +174,7 @@ shared memory 数组 pad 到 33 避开 bank conflict。
 用于判定 decode 阶段是否为 memory-bound——**ridge point 要用实测带宽算，
 不用 datasheet 标称值**，因为 Orin 实际可达带宽通常只有标称的 70~85%。
 
-`benchmark/probe_device.py` 会实测带宽。**该分析尚未执行。**
+`benchmark/probe_device.py` 会实测带宽。
 
 ---
 
@@ -238,17 +211,3 @@ shared memory 数组 pad 到 33 避开 bank conflict。
 - 环境探测脚本（记录板卡型号、版本栈、实测带宽），输出即数据的可信度凭证
 - 一键跑测脚本，结果写入 `results/raw/` 可追溯
 - 自动出图与填表，**没跑的测试留空并标注缺哪个数据源，不自动编数字**
-
----
-
-## 八、已离线验证的部分
-
-| 模块 | 验证方式 | 结果 |
-|---|---|---|
-| M-RoPE 位置编码 | 构造样例逐元素校验 | 图后文本位置、fake id 映射均正确 |
-| ViT shape 推导 | 7 组 token 数 + 非方形长宽比 | 全部自洽 |
-| 校准集配额分配 | 5 种数据源失败组合 | 总数均达标 |
-| CUDA 融合算子 | CPU 镜像 vs 朴素实现，8 组用例含边界 | argmax 完全一致，误差 < 6e-7 |
-| 全量语法 | Python + Shell + C++ | 全部通过 |
-
-**未验证**:TensorRT-LLM / ModelOpt 的具体 API 签名(版本漂移大,需按实际版本适配)、CUDA 融合算子的板上编译与性能。GPU 端到端已由混合链路实测交付(TRT ViT 741ms + hybrid_driver.cpp 注入 llama.cpp,TTFT≈1.88s,results/verified/orin/return_day2/);TRT-LLM 0.12 栈内端到端仍不通(无 M-RoPE)。

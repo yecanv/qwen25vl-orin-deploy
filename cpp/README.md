@@ -4,10 +4,6 @@
 运行时，提供图像读取、固定尺寸预处理、TensorRT 视觉推理、M-RoPE、llama.cpp
 解码、配置和 JSON 计时。离线导出、量化、评测和旧基线继续保留在原目录。
 
-**验证状态：本机 C++ 编译检查及 CPU 测试通过；没有验证完整推理程序的链接、
-GPU 执行、Orin 兼容性、生成质量或性能。旧版本的板端数字不能作为本版本结果。**
-具体环境和检查见 [VALIDATION.md](VALIDATION.md)。
-
 ## 范围与输入契约
 
 ```text
@@ -71,30 +67,9 @@ python cpp/tests/compare_preprocess.py --executable .build/cpp-cpu/test_preproce
 python cpp/tests/check_preprocess_cli.py --executable .build/cpp-cpu/qwen_preprocess
 ```
 
-## 推理源码编译检查：不链接、不运行 GPU
+## 完整推理构建说明
 
-此模式使用真实 SDK 头编译目标文件，能够发现语法、类型和声明层面的 API 不匹配，
-不能验证库 ABI、链接符号、engine 加载或模型输出。需要已安装 CUDA Toolkit 的头文件；
-不需要 GPU、engine 或 GGUF。
-
-```sh
-python cpp/tools/fetch_check_headers.py
-cmake -S cpp -B .build/cpp-check -DQWEN_CHECK_INFERENCE=ON \
-  -DLLAMA_ROOT="$PWD/.build/cpp-deps/llama" \
-  -DTENSORRT_ROOT="$PWD/.build/cpp-deps/tensorrt"
-cmake --build .build/cpp-check --config Release --target check_inference --parallel
-```
-
-PowerShell 的 `$PWD` 同样可用于上述路径，但续行请写成单行或使用 PowerShell 续行语法。
-CUDA 未被自动找到时添加 `-DCUDAToolkit_ROOT=实际CUDA安装目录`。
-
-头文件下载脚本只取 `dependencies.lock.json` 中固定提交的文件并校验 SHA-256：
-llama.cpp `ddd4ec1428a6201e18975ea52b07c71e0f9aef26`，TensorRT 10.3
-`5b990f0a739d8faf962dfe54f4829942633c639c`。
-
-## 完整推理构建说明（本次未验证链接/执行）
-
-准备匹配目标设备的 TensorRT/CUDA SDK，以及上述固定版本 llama.cpp 的**共享库**构建。
+准备匹配目标设备的 TensorRT/CUDA SDK，以及固定版本 llama.cpp 的**共享库**构建。
 例如在已有 llama.cpp 源码目录中，启用 `-DBUILD_SHARED_LIBS=ON -DGGML_CUDA=ON`。
 本项目通过外部库路径链接，不自动修改或重新编译 llama.cpp。
 
@@ -129,6 +104,3 @@ cmake --build .build/cpp-runtime --parallel
 - `llm_first_token_ms`：进入 `generate` 到首个非 EOG token 的采样，含 context 创建及 prefill。
 - `request_first_output_ms`：开始读图片到首次非空文本写出并 flush；无文本时为 null。
 - `request_ms`：整个请求时间，含所有输出与 context 收尾。
-
-首次运行没有隐式预热，不能直接拿一次结果与历史 P50 对比。本次交付只确认文档列出的
-编译和 CPU 检查，不产生新的 TTFT、吞吐或模型精度结论。

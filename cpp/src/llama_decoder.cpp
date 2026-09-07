@@ -133,8 +133,9 @@ public:
     }
 
     void decode_all(llama_context* context, const std::vector<llama_token>& tokens,
-                    llama_pos start, bool logits_last) {
+                    llama_pos start, bool logits_last, const std::function<bool()>& stop_requested) {
         for (std::size_t offset = 0; offset < tokens.size();) {
+            if (stop_requested && stop_requested()) throw std::runtime_error("Generation cancelled");
             const auto count = std::min(tokens_.size(), tokens.size() - offset);
             decode(context, tokens.data() + offset, count,
                    start + static_cast<llama_pos>(offset),
@@ -211,11 +212,18 @@ LlamaDecoder& LlamaDecoder::operator=(LlamaDecoder&&) noexcept = default;
 
 GenerationResult LlamaDecoder::generate(
     const VisionFeatures& features, const Grid& grid, const std::string& question,
-    const std::function<void(const std::string&)>& on_piece) {
+    const std::function<void(const std::string&)>& on_piece, const GenerationControl& control) {
     if (!impl_) throw std::logic_error("cannot use a moved-from LlamaDecoder");
     const auto start = Clock::now();
     const auto& state = *impl_;
-    const auto& options = state.options;
+    auto options = state.options;
+    if (control.max_new_tokens >= 0) options.max_new_tokens = control.max_new_tokens;
+    if (control.max_new_tokens < -1 || options.max_new_tokens >= options.n_ctx)
+        throw std::invalid_argument("Invalid per-request max_new_tokens");
+    const auto check_stop = [&] {
+        if (control.stop_requested && control.stop_requested()) throw std::runtime_error("Generation cancelled");
+    };
+    check_stop();
     if (features.rows <= 0 || features.hidden_size != state.hidden_size) {
         throw std::invalid_argument("vision feature rows/hidden_size do not match the GGUF input");
     }
@@ -257,6 +265,7 @@ GenerationResult LlamaDecoder::generate(
     if (rope.rows != features.rows) throw std::invalid_argument("vision rows do not match the merged patch grid");
 
     const auto context_start = Clock::now();
+    check_stop();
     auto params = llama_context_default_params();
     params.n_ctx = static_cast<std::uint32_t>(options.n_ctx);
     params.n_batch = static_cast<std::uint32_t>(std::min(options.n_batch, options.n_ctx));
@@ -280,10 +289,13 @@ GenerationResult LlamaDecoder::generate(
     }
     TextBatch batch(actual_batch);
     const auto prefill_start = Clock::now();
-    batch.decode_all(context.get(), prefix, 0, false);
+    batch.decode_all(context.get(), prefix, 0, false, control.stop_requested);
+    check_stop();
     decode_image(context.get(), features, rope);
-    batch.decode_all(context.get(), suffix, rope.next_position, true);
+    check_stop();
+    batch.decode_all(context.get(), suffix, rope.next_position, true, control.stop_requested);
     llama_synchronize(context.get());
+    check_stop();
     result.timing.prefill_ms = elapsed_ms(prefill_start);
     if (options.max_new_tokens == 0) return result;
 
@@ -293,6 +305,7 @@ GenerationResult LlamaDecoder::generate(
     const auto generation_start = Clock::now();
     Clock::time_point first_token_time{};
     for (int step = 0; step < options.max_new_tokens; ++step) {
+        check_stop();
         const llama_token token = llama_sampler_sample(sampler.get(), context.get(), -1);
         if (token == LLAMA_TOKEN_NULL) throw std::runtime_error("sampler returned no token");
         if (llama_vocab_is_eog(state.vocab, token)) {
@@ -309,6 +322,7 @@ GenerationResult LlamaDecoder::generate(
         if (on_piece && !piece.empty()) on_piece(piece);
         // The final requested token need not be decoded: there is no next sample.
         if (step + 1 == options.max_new_tokens) break;
+        check_stop();
         batch.decode(context.get(), &token, 1U, next_position, true);
         ++result.decoded_tokens;
         ++next_position;
